@@ -20,6 +20,7 @@
     <form class="delete-enclos" id="form-<?= $data['enclosure']['id'] ?>" action="/deleteEnclosure" method="post">
         <input type="hidden" name="id" value="<?= $data['enclosure']['id'] ?>">
         <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+        <a href="/animals?enclosId=<?= $data['enclosure']['id'] ?>"><button type="button" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></a>
     </form>
 
 </div>

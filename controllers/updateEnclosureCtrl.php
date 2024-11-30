@@ -1,7 +1,9 @@
 <?php 
-require 'models/Enclosure.php';
+use App\models\Enclosure;
 
+// Création de l'instance de la classe Enclosure
 $enclosure = new Enclosure();
+
 
 // Création d'un tableau regroupant les erreurs
 $error = [];

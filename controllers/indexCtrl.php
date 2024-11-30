@@ -1,5 +1,5 @@
 <?php 
-require 'models/Enclosure.php';
+use App\models\Enclosure;
 
 // Création de l'instance de la classe Enclosure 
 $enclosure = new Enclosure();

@@ -22,3 +22,28 @@ window.addEventListener('DOMContentLoaded', function () {
         })
     });
   })
+
+window.addEventListener('DOMContentLoaded', function () {
+    const deleteAnimal = document.querySelectorAll('.delete-animal');
+    deleteAnimal.forEach(function (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+  
+            let form = e.currentTarget;
+            Swal.fire({
+                title: 'Suppression d\'un animal',
+                text: "Voulez vous supprimer définitivement cet animal ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Supprimer',
+                cancelButtonText : 'Annuler',
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    console.log('suppression confirmée', form);
+                    // soumission du formulaire par le code
+                    form.submit();
+                }
+            });
+        })
+    });
+  })

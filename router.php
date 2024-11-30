@@ -7,6 +7,7 @@
 // Require utils.php permet que les fonctions présentes dans ce fichier soit accessible partout dans le projet, peut importe la route contacter
 
 require 'utils/utils.php';
+require 'utils/sqlAutoload.php';
 
 
 switch ($_SERVER['REDIRECT_URL']) {
@@ -19,6 +20,15 @@ switch ($_SERVER['REDIRECT_URL']) {
 	case '/updateEnclosure':
 		require 'controllers/updateEnclosureCtrl.php';
 		break;
+    case '/animals':
+        require 'controllers/animalIndexCtrl.php';
+        break;
+    case '/updateAnimals':
+        require 'controllers/updateAnimalCtrl.php';
+        break;
+    case '/deleteAnimals':
+        require 'controllers/deleteAnimalCtrl.php';
+        break;
 	default:
 		require 'views/404.php';
 		break;

@@ -6,6 +6,7 @@ function redirectTo($url)
 
 function render($path, $data = [], $templates = false)
 {
+	extract($data);
 	if ($templates) {
 		require "templates/$path.php";
 	} else {
