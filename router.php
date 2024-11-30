@@ -13,6 +13,12 @@ switch ($_SERVER['REDIRECT_URL']) {
 	case '/':
 		require 'controllers/indexCtrl.php';
 		break;
+	case '/deleteEnclosure':
+		require 'controllers/deleteEnclosureCtrl.php';
+		break;
+	case '/updateEnclosure':
+		require 'controllers/updateEnclosureCtrl.php';
+		break;
 	default:
 		require 'views/404.php';
 		break;

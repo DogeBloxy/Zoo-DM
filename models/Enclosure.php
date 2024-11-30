@@ -51,4 +51,64 @@ class Enclosure extends Database
 
 		$this->description = htmlspecialchars($description);
 	}
+
+    public function getCreated_by() {
+        return $this->created_by;
+    }
+
+    public function setCreated_by($created_by) {
+        if (empty($created_by)) throw new Exception("La date de création est obligatoire");
+    }
+
+
+    /**
+     * Fonction affichant tous les enclos avec toutes leurs variables de la table 'enclos' de la base de données
+     */
+    public function showEnclosure() {
+        $stmt = $this->db->query('SELECT * FROM `enclos`');
+        return $stmt->fetchAll();
+    }
+
+    public function showEnclosureID()
+	{
+		$stmt = $this->db->prepare('SELECT * FROM `enclos` WHERE `id` = :id');
+		$stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+
+    /**
+     * Fonction permettant d'ajouter des tâches en fonction du nom, de l'id de la catégorie et de la description.
+     * Ajout des valeurs dans la table 'tasks' de la base de données
+     */
+    public function addEnclosure() {
+        $sql = 'INSERT INTO `enclos` (`name`, `description`) VALUES (:name, :description)';
+		$sth = $this->db->prepare($sql);
+		$sth->bindValue(':name', $this->name, PDO::PARAM_STR);
+		$sth->bindValue(':description', $this->description, PDO::PARAM_STR);
+
+		return $sth->execute();
+    }
+
+    public function updateEnclosure()
+	{
+
+		$sql = 'UPDATE `enclos` SET `name`= :name, `description`= :description WHERE `id` = :id';
+		$sth = $this->db->prepare($sql);
+		$sth->bindValue(':name', $this->name, PDO::PARAM_STR);
+		$sth->bindValue(':description', $this->description, PDO::PARAM_STR);
+		$sth->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+		return $sth->execute();
+	}
+
+    /**
+     * Fonction permettant de supprimer un enclos depuis son ID
+     */
+	public function deleteEnclosure()
+	{
+		$stmt = $this->db->prepare('DELETE FROM `enclos` WHERE `id` = ?');
+		return $stmt->execute([$this->id]);
+	}
+
 }

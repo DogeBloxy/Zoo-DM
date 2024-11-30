@@ -1,13 +1,20 @@
 <?php 
 require 'models/Enclosure.php';
 
-// Création de l'instance de la classe Enclosure 
 $enclosure = new Enclosure();
 
 // Création d'un tableau regroupant les erreurs
 $error = [];
 
-if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add-enclosure'])) {
+ // Si l'id dans l'adresse est vide on redirige vers la page d'acceuil sinon on récupère l'id de la tâche
+ if (empty($_GET['id'])) redirectTo('/');
+ try {
+     $enclosure->setId($_GET['id']);
+ } catch (\Throwable $th) {
+     redirectTo('/');
+ } 
+
+ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['update-enclosure'])) {
     // vérification du champ name
     if (!empty($_POST['enclosureName'])) {
         try {
@@ -33,7 +40,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add-enclosure'])) {
     // vérification de l'absence d'erreur
     if (empty($error)) {
         // Création de la tâche
-        if ($enclosure->addEnclosure()) {
+        if ($enclosure->updateEnclosure()) {
             // Redirection vers la page index.php
             header('Location: /');
         } else {
@@ -42,11 +49,9 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') && isset($_POST['add-enclosure'])) {
     }
 }
 
-render('index', [
-    'enclosure' => $enclosure->showEnclosure(),
+ render('updateEnclosure', [
+    'enclosure' => $enclosure->showEnclosureID(),
     'errors' => $error
 ]);
-
-
 
 ?>

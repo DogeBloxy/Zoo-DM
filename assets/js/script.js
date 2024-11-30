@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function () {
             let form = e.currentTarget;
             Swal.fire({
                 title: 'Suppression d\'un enclos',
-                text: "Voulez vous supprimer définitivement l'enclos' ?",
+                text: "Voulez vous supprimer définitivement l'enclos ?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Supprimer',
